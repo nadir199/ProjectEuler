@@ -213,5 +213,35 @@ public class Euler {
         return maxValue;
     }
 
+    //Problem9 : Special Pythagorean triplet
+    public static void EASYSOLUTIONCRAP_Problem9(){
+        for(int a=1;a<1000;a++){
+            for(int b=a;b<1000;b++){
+                for(int c=1;c<1000;c++){
+                    if(Math.pow(a,2)+Math.pow(b,2)==Math.pow(c,2) && a+b+c==1000)
+                    {
+                        System.out.println(a+"   "+b+"   "+c);
+                    }
+                }
+            }
+        }
+    }
+    public static BigInteger pythagoreanTripletAddUpTo_Problem9(int number){
+        BigInteger product=BigInteger.ZERO;
+        for(int a=1;a<number;a++){
+            for(int b=a;b<number;b++){
+                int c=number -a-b;
+                if(Math.pow(a,2)+Math.pow(b,2)==Math.pow(c,2))
+                {
+                    System.out.println("(a,b,c)=("+a+" , "+b+" , "+c+")");
+                    product=new BigInteger(a+"")
+                            .multiply(new BigInteger(b+""))
+                            .multiply(new BigInteger(c+""));
+                    break;
+                }
 
+            }
+        }
+        return product;
+    }
 }
