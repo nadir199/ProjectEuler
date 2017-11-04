@@ -92,4 +92,28 @@ public class Euler {
         return maxPalindrome;
     }
 
+    //Problem 5 Smallest multiple //number >=2
+    public static BigInteger evenlyDivisibleByAllLessThanOrEquelNumber_Problem5(int number){
+        BigInteger smallestMultiple;
+        if(number%2==0)
+            smallestMultiple=new BigInteger(number+"");
+        else
+            smallestMultiple=new BigInteger((number+1)+"");
+        boolean dividedByAll;
+        while (true){
+            dividedByAll=true;
+            for(int i=1;i<=number;i++){
+                if(!smallestMultiple.mod(new BigInteger(i+"")).equals(BigInteger.ZERO)) {
+                    dividedByAll = false;
+                    break;
+                }
+            }
+            if(!dividedByAll)
+                smallestMultiple=smallestMultiple.add(new BigInteger("2"));
+            else
+                break;
+        }
+        return smallestMultiple;
+    }
+
 }
