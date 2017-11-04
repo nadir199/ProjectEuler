@@ -244,4 +244,34 @@ public class Euler {
         }
         return product;
     }
+
+    //Problem 10 : Get sum of all primes less than MAX_NUMBER
+    public static HashSet<Integer> getAllPrimesBelowN(int MAX_NUMBER){
+        int numb=3;
+        HashSet<Integer> primes = new HashSet<Integer>();
+        primes.add(2);
+        while(numb<=MAX_NUMBER){
+            boolean prime=true;
+            for (int pr:primes)
+                if(numb%pr==0)
+                {
+                    prime=false;
+                    break;
+                }
+            if(prime) {
+                primes.add(numb);
+            }
+            else
+                numb+=2;
+        }
+        return primes;
+    }
+    public static BigInteger getSumAllPrimesBelowN_Problem10(int number){
+        HashSet<Integer> primesBelowN= getAllPrimesBelowN(number);
+        BigInteger sum = BigInteger.ZERO;
+        for(int prime:primesBelowN){
+            sum=sum.add(new BigInteger(prime+""));
+        }
+        return sum;
+    }
 }
