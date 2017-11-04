@@ -274,4 +274,72 @@ public class Euler {
         }
         return sum;
     }
+
+    //Problem 11: Largest product in a grid
+    public static int[][] strGridToIntArray(String grid){
+        String[] lines= grid.split("\n");
+
+        int[][] gridArray=new int[lines.length][lines[0].split(" ").length];
+        int i=0;
+        int j=0;
+        for(String line:lines){
+            j=0;
+            String[] lineArray= line.split(" ");
+            for(String number:lineArray){
+                gridArray[i][j]=Integer.parseInt(number);
+                j++;
+            }
+            i++;
+        }
+        return gridArray;
+
+    }
+
+    public static BigInteger getLargestProductInGrid_Problem11(int[][] grid,int numbAdjNumbers){
+        //left right etc
+        BigInteger maxProduct=BigInteger.ZERO;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[i].length;j++){
+                //right;
+                BigInteger product=BigInteger.ONE;
+
+                //Right case
+                if(j+numbAdjNumbers-1<grid[i].length){
+                    for(int k =0;k<numbAdjNumbers;k++){
+                        product=product.multiply(new BigInteger(grid[i][j+k]+""));
+                    }
+                    if(product.compareTo(maxProduct)>0)
+                        maxProduct=product;
+                }
+                //Down case
+                product=BigInteger.ONE;
+                if(i+numbAdjNumbers-1<grid.length){
+                    for(int k =0;k<numbAdjNumbers;k++){
+                        product=product.multiply(new BigInteger(grid[i+k][j]+""));
+                    }
+                    if(product.compareTo(maxProduct)>0)
+                        maxProduct=product;
+                }
+                //Diagonal Right
+                product=BigInteger.ONE;
+                if(j+numbAdjNumbers-1<grid.length && i+numbAdjNumbers-1<grid[i].length){
+                    for(int k=0;k<numbAdjNumbers;k++){
+                        product=product.multiply(new BigInteger(grid[i+k][j+k]+""));
+                    }
+                    if(product.compareTo(maxProduct)>0)
+                        maxProduct=product;
+                }
+                //Diagonal Left
+                product=BigInteger.ONE;
+                if(j-numbAdjNumbers+1>=0 && i+numbAdjNumbers-1<grid[i].length){
+                    for(int k=0;k<numbAdjNumbers;k++){
+                        product=product.multiply(new BigInteger(grid[i+k][j-k]+""));
+                    }
+                    if(product.compareTo(maxProduct)>0)
+                        maxProduct=product;
+                }
+            }
+        }
+        return maxProduct;
+    }
 }
