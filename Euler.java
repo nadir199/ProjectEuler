@@ -116,4 +116,24 @@ public class Euler {
         return smallestMultiple;
     }
 
+    //Problem 6 Sum square difference
+    public static BigInteger sumSq(int n){
+        BigInteger sum=BigInteger.ZERO;
+        for(BigInteger i=BigInteger.ONE;i.compareTo(new BigInteger(n+""))<=0;i=i.add(BigInteger.ONE)){
+            sum=sum.add(i.pow(2));
+        }
+        return sum;
+    }
+    public static BigInteger sqSum(int n){
+        BigInteger sum=BigInteger.ZERO;
+        for(BigInteger i=BigInteger.ONE;i.compareTo(new BigInteger(n+""))<=0;i=i.add(BigInteger.ONE)){
+            sum=sum.add(i);
+        }
+        return sum.pow(2);
+    }
+    public static BigInteger SumSqANDSqSumDiff_Problem6(int n){
+        return sqSum(n).subtract(sumSq(n));
+    }
+
+
 }
