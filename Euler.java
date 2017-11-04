@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.HashSet;
 
 /**
  * Created by Asus on 20/09/2017.
@@ -133,6 +134,55 @@ public class Euler {
     }
     public static BigInteger SumSqANDSqSumDiff_Problem6(int n){
         return sqSum(n).subtract(sumSq(n));
+    }
+
+    //Problem 7 : get 10001st prime
+    public static BigInteger nThPrime_Problem7(int n){
+        int i=1;
+        BigInteger number=new BigInteger("3");
+        HashSet<BigInteger> primes = new HashSet<BigInteger>();
+        primes.add(new BigInteger("2"));
+
+        while(i<n){
+            boolean prime=true;
+            for (BigInteger pr:primes)
+                if(number.mod(pr).equals(BigInteger.ZERO))
+                {
+                    prime=false;
+                    break;
+                }
+            if(prime) {
+                primes.add(number);
+                i++;
+            }
+            else
+                number=number.add(new BigInteger("2"));
+        }
+        return number;
+    }
+    //Additional
+    public static HashSet<BigInteger> getAllFirstNPrimes(int n){
+        int i=1;
+        BigInteger number=new BigInteger("3");
+        HashSet<BigInteger> primes = new HashSet<BigInteger>();
+        primes.add(new BigInteger("2"));
+
+        while(i<n){
+            boolean prime=true;
+            for (BigInteger pr:primes)
+                if(number.mod(pr).equals(BigInteger.ZERO))
+                {
+                    prime=false;
+                    break;
+                }
+            if(prime) {
+                primes.add(number);
+                i++;
+            }
+            else
+                number=number.add(new BigInteger("2"));
+        }
+        return primes;
     }
 
 
