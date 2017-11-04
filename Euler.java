@@ -185,5 +185,33 @@ public class Euler {
         return primes;
     }
 
+    //Problem8 Largest Product in a series
+    public static BigInteger getSeriesProduct(String serie){
+        String stringNumbs[]= serie.split("");
+        BigInteger product = BigInteger.ONE;
+        int i=0;
+        for(String numb :stringNumbs){
+            product=product.multiply(new BigInteger(numb));
+        }
+        return product;
+    }
+
+    public static BigInteger getLargestProductValue_Problem8(String serie,int length){
+        int start=0;
+        int end =length;
+        BigInteger maxValue= BigInteger.ZERO;
+        BigInteger product;
+        while(end < serie.length()){
+            String segment= serie.substring(start,end);
+            product= getSeriesProduct(segment);
+            if(product.compareTo(maxValue)>0)
+                maxValue = product;
+            start++;
+            end++;
+
+        }
+        return maxValue;
+    }
+
 
 }
