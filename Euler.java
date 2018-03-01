@@ -456,4 +456,35 @@ public class Euler {
         String resultSum=sumNumbers(stringsToArray(numbers,truncation)).toString();
         return truncateNumber(resultSum,truncation);*/
     }
+
+    //Problem 13 Longest chain Collatz Problem
+    public static BigInteger collatz(BigInteger n){
+        if(n.mod(new BigInteger("2")).equals(BigInteger.ONE))
+            return n.multiply(new BigInteger("3")).add(BigInteger.ONE);
+        return n.divide(new BigInteger("2"));
+    }
+    public static int getCollatzChainLength(BigInteger n){
+        int count=1;
+        while(!n.equals(BigInteger.ONE)){
+            n=collatz(n);
+            count++;
+        }
+        return count;
+    }
+
+        public static BigInteger getLongestCollatzChainUnder_Problem14(BigInteger THRESHOLD){
+        int max=0;
+        BigInteger I_MAX=BigInteger.ONE;
+        for(BigInteger i=BigInteger.ONE;i.compareTo(THRESHOLD)<=0;i=i.add(BigInteger.ONE)){
+            int size=getCollatzChainLength(i);
+            System.out.println(i+":\n");
+            if(size>max) {
+                max = size;
+                I_MAX=i;
+                System.out.printf("Number : "+I_MAX + " / Length : "+max+"\n");
+            }
+        }
+        System.out.printf("Number : "+I_MAX + " / Length : "+max);
+        return I_MAX;
+    }
 }
