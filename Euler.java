@@ -421,4 +421,39 @@ public class Euler {
         }
         return trigNumber;
     }
+
+    /// PROBLEM 13
+    /*public static BigInteger truncateNumber(String number,int numbDigits){
+        return new BigInteger(number.substring(number.length()-numbDigits));
+    }
+    public static BigInteger[] stringsToArray(String numbers,int numbDigitsTruncation){
+        String stringsArray[]=numbers.split("\n");
+        BigInteger[] numbersTruncated=new BigInteger[stringsArray.length];
+        for(int i=0;i<stringsArray.length;i++){
+            numbersTruncated[i]=truncateNumber(stringsArray[i],numbDigitsTruncation);
+        }
+        return numbersTruncated;
+    }
+    public static BigInteger sumNumbers(BigInteger[] numbers){
+        BigInteger sum= BigInteger.ZERO;
+        for(int i=0;i<numbers.length;i++) {
+            System.out.println(i+"  :: " +numbers[i]+"\n");
+            sum=sum.add(numbers[i]);
+        }
+        return sum;
+    }*/
+    public static BigInteger getSumTruncatedOfList_Problem13(String numbers,int truncation){
+        String stringsArray[]=numbers.split("\n");
+        BigInteger[] numbersTruncated=new BigInteger[stringsArray.length];
+        BigInteger sum=BigInteger.ZERO;
+        for(int i=0;i<stringsArray.length;i++){
+            numbersTruncated[i]=new BigInteger(stringsArray[i]);
+            sum=sum.add(numbersTruncated[i]);
+
+        }
+        return sum;
+        /*
+        String resultSum=sumNumbers(stringsToArray(numbers,truncation)).toString();
+        return truncateNumber(resultSum,truncation);*/
+    }
 }
