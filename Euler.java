@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -341,5 +342,83 @@ public class Euler {
             }
         }
         return maxProduct;
+    }
+    //Problem 12: Highly divisible triangular number
+    //Simplest stuff
+    /*public static int getNumberOfDivisors(BigInteger number){
+        BigInteger pas=BigInteger.ONE.add(number.mod(new BigInteger("2")));
+        int numberDivisors=0;
+        for(BigInteger i=BigInteger.ONE;i.compareTo(number.divide(new BigInteger("2")))<=0;i=i.add(pas)){
+            if(number.mod(i).compareTo(BigInteger.ZERO)==0)
+                numberDivisors++;
+        }
+        return numberDivisors+1;
+    }*/
+    private static BigInteger newtonIteration(BigInteger n, BigInteger x0)
+    {
+        final BigInteger x1 = n.divide(x0).add(x0).shiftRight(1);
+        return x0.equals(x1)||x0.equals(x1.subtract(BigInteger.ONE)) ? x0 : newtonIteration(n, x1);
+    }
+
+    public static BigInteger sqrt(final BigInteger number)
+    {
+        if(number.signum() == -1)
+            throw new ArithmeticException("We can only calculate the square root of positive numbers.");
+        return newtonIteration(number, BigInteger.ONE);
+    }
+    public static int getNumbDivFaster(BigInteger number){
+        ArrayList<Integer> primePowers = new ArrayList<Integer>();
+        int numberDivisors=1;
+        BigInteger LAST_TEST=sqrt(number);
+        for(BigInteger i=new BigInteger("2");i.compareTo(LAST_TEST)<=0;i=i.nextProbablePrime()){
+            int power=0;
+            while(number.mod(i).compareTo(BigInteger.ZERO)==0)
+            {
+                power++;
+                number=number.divide(i);
+            }
+            if(power>0)
+                numberDivisors*=power+1;
+
+        }
+        if(numberDivisors>1)
+            return numberDivisors;
+        return 2;
+    }
+    //called triangle number
+    /*public static BigInteger sumOfNumbers(BigInteger number){
+        BigInteger sum=BigInteger.ZERO;
+        for(BigInteger i=BigInteger.ONE;i.compareTo(number)<=0;i=i.add(BigInteger.ONE)){
+            sum=sum.add(i);
+        }
+        return sum;
+    }
+    //Crap algorithm over 40 minutes for nbDivisors = 500
+    public static BigInteger getFirstTriangNumberNbDivOver_Crap(int nbDivisors){
+        BigInteger i=BigInteger.ONE;
+        BigInteger trigNumber=BigInteger.ZERO;
+        while(true){
+            trigNumber =sumOfNumbers(i);
+            int nbD=getNumberOfDivisors(trigNumber);
+            System.out.println(i+ " : "+ nbD);
+            if(nbD>nbDivisors)
+                break;
+            i=i.add(BigInteger.ONE);
+        }
+        return trigNumber;
+    }*/
+
+    public static BigInteger getFirstTriangNumberNbDivOver_Problem12(int nbDivisors){
+        BigInteger i=BigInteger.ONE;
+        BigInteger trigNumber=BigInteger.ZERO;
+        while(true){
+            trigNumber =trigNumber.add(i);
+            int nbDiv=getNumbDivFaster(trigNumber);
+            //System.out.println(trigNumber+"  /   Nbdiv: "+nbDiv);
+            if(nbDiv>=nbDivisors)
+                break;
+            i=i.add(BigInteger.ONE);
+        }
+        return trigNumber;
     }
 }
