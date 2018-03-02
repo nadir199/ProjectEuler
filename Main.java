@@ -9,7 +9,7 @@ import java.util.BitSet;
 public class Main {
     public static void main(String[] args){
 
-        System.out.println(Euler.printSetOfMoves_Problem15(20,20));
+        System.out.println(Euler.sumDigitsPow2_Problem16(15));
         //Euler.getLongestCollatzChainUnder_Problem14(new BigInteger("1000000"));
     }
 

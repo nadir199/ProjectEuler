@@ -511,4 +511,15 @@ public class Euler {
         return printSetOfMoves(x,y,map);
 
     }
+
+    //PROBLEM 16
+    public static BigInteger sumDigitsPow2_Problem16(int pow){
+        BigInteger number=(new BigInteger("2")).pow(pow);
+        BigInteger sum=BigInteger.ZERO;
+        while(!number.equals(BigInteger.ZERO)){
+            sum=sum.add(number.mod(BigInteger.TEN));
+            number=number.divide(BigInteger.TEN);
+        }
+        return sum;
+    }
 }
