@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashSet;
 
@@ -705,5 +706,76 @@ public class Euler {
             sum+=countNbLettersInNumber(i);
         }
         return sum;
+    }
+
+    //Problem18 Tree
+    public static int[][] triangleToArray(String trig){
+        String[] lines= trig.split("\n");
+        int[][] numberTree = new int[lines.length][];
+        for(int i=0;i<numberTree.length;i++){
+            String[] line=lines[i].split(" ");
+            numberTree[i]=new int[line.length];
+            for(int j=0;j<line.length;j++){
+                numberTree[i][j]=Integer.parseInt(line[j]);
+            }
+        }
+        return numberTree;
+    }
+    public static int[][] reduceTriangle(int[][] triangle,boolean[][] path){
+        int[][] newTriangle=new int[triangle.length-1][];
+        for(int i=0;i<newTriangle.length;i++){
+            newTriangle[i]=new int[triangle[i].length];
+            for(int j=0;j<newTriangle[i].length;j++){
+                newTriangle[i][j]=triangle[i][j];
+            }
+        }
+        int LAST_LINE_INDEX=newTriangle.length-1;
+        for(int i=0;i<newTriangle[LAST_LINE_INDEX].length;i++){
+            if(triangle[LAST_LINE_INDEX+1][i]>triangle[LAST_LINE_INDEX+1][i+1])
+            {
+                path[LAST_LINE_INDEX+1][i]=true;
+            }
+            else if (triangle[LAST_LINE_INDEX+1][i]<triangle[LAST_LINE_INDEX+1][i+1]){
+                path[LAST_LINE_INDEX+1][i+1]=true;
+            }
+            else
+            {
+                path[LAST_LINE_INDEX+1][i]=true;
+                //path[LAST_LINE_INDEX+1][i+1]=true;
+            }
+            newTriangle[LAST_LINE_INDEX][i]+=Math.max(triangle[LAST_LINE_INDEX+1][i],triangle[LAST_LINE_INDEX+1][i+1]);
+        }
+
+        return newTriangle;
+    }
+    public static boolean[][] initializeArray(int[][] arrayModel){
+        boolean[][] boolArray=new boolean[arrayModel.length][];
+        for(int i=0;i<arrayModel.length;i++)
+        {
+            boolArray[i]=new boolean[arrayModel[i].length];
+            for(int j=0;j<arrayModel[i].length;j++){
+                boolArray[i][j]=false;
+            }
+        }
+        return boolArray;
+    }
+    public static void showPathTree(boolean[][] path){
+        for(int i=0;i<path.length;i++){
+            for(int j=0;j<path[i].length;j++){
+                System.out.print(path[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+    public static int getLongestPathLength_Problem18(String triangle){
+        int[][] toNumb=triangleToArray(triangle);
+        boolean[][] path=initializeArray(toNumb);
+
+        do{
+            toNumb=Euler.reduceTriangle(toNumb,path);
+        }while((toNumb.length!=1));
+        path[0][0]=true;
+        showPathTree(path);
+        return toNumb[0][0];
     }
 }
