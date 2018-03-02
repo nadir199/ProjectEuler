@@ -523,4 +523,187 @@ public class Euler {
     }
 
     //PROBLEM 17
+
+    public static String numberToString(int number){
+        String stringNumber="";
+        int saveNumber=number;
+        String part="";
+        if(number==0)
+            return "Zero";
+        if((number/10)%10!=1)
+            switch(number%10){
+                case 1:
+                    part="One";
+                    break;
+                case 2:
+                    part="Two";
+                    break;
+                case 3:
+                    part="Three";
+                    break;
+                case 4:
+                    part="Four";
+                    break;
+                case 5:
+                    part="Five";
+                    break;
+                case 6:
+                    part="Six";
+                    break;
+                case 7:
+                    part="Seven";
+                    break;
+                case 8:
+                    part="Eight";
+                    break;
+                case 9:
+                    part="Nine";
+                    break;
+
+            }
+        else
+            switch(number%10){
+                case 0:
+                    part="ten";
+                    break;
+                case 1:
+                    part="eleven";
+                    break;
+                case 2:
+                    part="twelve";
+                    break;
+                case 3:
+                    part="thirteen";
+                    break;
+                case 4:
+                    part="fourteen";
+                    break;
+                case 5:
+                    part="fifteen";
+                    break;
+                case 6:
+                    part="sixteen";
+                    break;
+                case 7:
+                    part="seventeen";
+                    break;
+                case 8:
+                    part="eighteen";
+                    break;
+                case 9:
+                    part="nineteen";
+                    break;
+
+            }
+        stringNumber+=part;
+        part="";
+        number=number/10;
+        switch(number%10){
+            case 2:
+                part="twenty";
+                break;
+            case 3:
+                part="thirty";
+                break;
+            case 4:
+                part="forty";
+                break;
+            case 5:
+                part="fifty";
+                break;
+            case 6:
+                part="sixty";
+                break;
+            case 7:
+                part="seventy";
+                break;
+            case 8:
+                part="eighty";
+                break;
+            case 9:
+                part="ninety";
+                break;
+        }
+        stringNumber=part+" "+stringNumber;
+
+        number=number/10;
+        part="";
+        //Hundreds
+        if (saveNumber%100!=0 && saveNumber/100!=0)
+            stringNumber="and "+stringNumber;
+
+        switch(number%10){
+            case 1:
+                part="One hundred";
+                break;
+            case 2:
+                part="Two hundred";
+                break;
+            case 3:
+                part="Three hundred";
+                break;
+            case 4:
+                part="Four hundred";
+                break;
+            case 5:
+                part="Five hundred";
+                break;
+            case 6:
+                part="Six hundred";
+                break;
+            case 7:
+                part="Seven hundred";
+                break;
+            case 8:
+                part="Eight hundred";
+                break;
+            case 9:
+                part="Nine hundred";
+                break;
+        }
+        stringNumber=part +" "+ stringNumber;
+        number=number/10;
+        part ="";
+        switch(number%10){
+            case 1:
+                part="One thousand";
+                break;
+            case 2:
+                part="Two thousand";
+                break;
+            case 3:
+                part="Three thousand";
+                break;
+            case 4:
+                part="Four thousand";
+                break;
+            case 5:
+                part="Five thousand";
+                break;
+            case 6:
+                part="Six thousand";
+                break;
+            case 7:
+                part="Seven thousand";
+                break;
+            case 8:
+                part="Eight thousand";
+                break;
+            case 9:
+                part="Nine thousand";
+                break;
+        }
+        stringNumber=part +" "+stringNumber;
+        return stringNumber;
+    }
+    public static int countNbLettersInNumber(int number){
+        return numberToString(number).replaceAll(" ","").length();
+    }
+    public static int totalNbLettersFromTo_Problem17(int from,int to) {
+        int sum=0;
+        for(int i=from;i<=to;i++){
+            sum+=countNbLettersInNumber(i);
+        }
+        return sum;
+    }
 }
