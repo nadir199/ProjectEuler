@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashSet;
 
 /**
@@ -486,5 +487,28 @@ public class Euler {
         }
         System.out.printf("Number : "+I_MAX + " / Length : "+max);
         return I_MAX;
+    }
+
+    //Problem 15
+    //Go down and right only all possible values
+    ///// DIDN'T Know how to do it apart from combinations 000000011111111 same # of 0s and 1s and combination of 1 placements.
+    public static long printSetOfMoves(int x,int y,long[][] map){
+        if(x==0 || y==0)
+            return 1;
+        if(map[x][y]!=0)
+            return map[x][y];
+
+        map[x][y]=printSetOfMoves(x-1,y,map)+printSetOfMoves(x,y-1,map);
+        return map[x][y];
+    }
+    public static long printSetOfMoves_Problem15(int x,int y){
+        long map[][]=new long[x+1][y+1];
+        for(int i=0;i<map.length;i++){
+            for(int j=0;j<map[i].length;j++){
+                map[i][j]=0;
+            }
+        }
+        return printSetOfMoves(x,y,map);
+
     }
 }
