@@ -513,13 +513,14 @@ public class Euler {
     }
 
     //PROBLEM 16
-    public static BigInteger sumDigitsPow2_Problem16(int pow){
-        BigInteger number=(new BigInteger("2")).pow(pow);
-        BigInteger sum=BigInteger.ZERO;
-        while(!number.equals(BigInteger.ZERO)){
-            sum=sum.add(number.mod(BigInteger.TEN));
-            number=number.divide(BigInteger.TEN);
+    public static int sumDigitsPow2_Problem16(int pow){
+        String[] numbers=(new BigInteger("2")).pow(pow).toString().split("");
+        int sum=0;
+        for(int i=0;i<numbers.length;i++){
+            sum+=Integer.parseInt(numbers[i]);
         }
         return sum;
     }
+
+    //PROBLEM 17
 }
