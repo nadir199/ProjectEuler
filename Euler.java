@@ -778,4 +778,224 @@ public class Euler {
         showPathTree(path);
         return toNumb[0][0];
     }
+
+    //Problem 19 Counting sundays
+
+    //dateDebut et dateFin Inclus
+    // jour
+    // Saturday  0 || Sunday 1
+    // Monday    2 || Tuesday 3
+    // Wednesday 4 || Thursday 5
+    // Friday 6
+    //Date Début >= 1/1/1900
+    public static int compareDates(String d1,String d2){
+        String[] dateStr1=d1.split("/");
+        String[] dateStr2=d2.split("/");
+        int day1=Integer.parseInt(dateStr1[0]);
+        int month1=Integer.parseInt(dateStr1[1]);
+        int year1=Integer.parseInt(dateStr1[2]);
+        int day2=Integer.parseInt(dateStr2[0]);
+        int month2=Integer.parseInt(dateStr2[1]);
+        int year2=Integer.parseInt(dateStr2[2]);
+        if(year1>year2)
+            return 1;
+        else if (year2>year1)
+            return -1;
+        else
+        {
+            if(month1>month2)
+                return 1;
+            else if (month2>month1)
+                return -1;
+            else
+            {
+                if(day1>day2)
+                    return 1;
+                else if (day2>day1)
+                    return -1;
+                else
+                    return 0;
+            }
+
+        }
+    }
+    //Count number of weekday between two dates
+    public static int getNumberOfDaysBetween_Problem19_WhatIThought_DIdnt_Read_Well(String dateDebut,String dateFin,int jour){
+        int nbDays=1;
+        int weekDay=2;
+        int day= 1;
+        int month=1;
+        int year=1900;
+        String date=day+"/"+month+"/"+year;
+        while(compareDates(date,dateDebut)<0){
+            date=getNextWeekDay(date,weekDay,jour);
+            weekDay=jour;
+        }
+
+        while(compareDates(date,dateFin)<0){
+            date=getNextWeekDay(date,jour,jour);
+            nbDays++;
+        }
+
+        return nbDays;
+    }
+    public static String getNextWeekDay(String currentDate,int curWeekDay, int weekDay){
+        String date="";
+        String dateString[]=currentDate.split("/");
+        int day=Integer.parseInt(dateString[0]);
+        int month=Integer.parseInt(dateString[1]);
+        int year=Integer.parseInt(dateString[2]);
+        int daysRemaining=0;
+        if(weekDay>curWeekDay)
+            daysRemaining=weekDay-curWeekDay;
+        else
+            daysRemaining=7-(curWeekDay-weekDay);
+
+        if(month==2){
+            int nbDaysFeb;
+            if((year%4==0 && year%100!=0) || year%400==0){ // February 29
+                nbDaysFeb=29;
+            }
+            else
+            {
+                nbDaysFeb=28;
+            }
+            if(day+daysRemaining<(nbDaysFeb+1)){
+                day+=daysRemaining;
+            }
+            else
+            {
+                day=(day+daysRemaining)%(nbDaysFeb+1)+1;
+                month++;
+            }
+
+        }
+        else
+        {
+            if( (month<8 && month%2==0) || (month>=8 && month%2 ==1)){ //Mois de 30
+                if(day+daysRemaining<31){
+                    day+=daysRemaining;
+                }
+                else
+                {
+                    day=(day+daysRemaining)%31+1;
+                    month++;
+                }
+            }
+            else // mois de 31
+            {
+                if(day+daysRemaining<32){
+                    day+=daysRemaining;
+                }
+                else if (month!=12)
+                {
+                    day=(day+daysRemaining)%32+1;
+                    month++;
+                }
+                else
+                {
+                    year++;
+                    month=1;
+                    day=(day+daysRemaining)%32+1;
+                }
+            }
+        }
+        date=day+"/"+month+"/"+year;
+        return date;
+    }
+
+    static int getNbDaysPerYear(int year){
+        if( (year%4==0 && year%100!=0)  || year%400 == 0)
+            return 365;
+        return 366;
+    }
+    static int getNumberDaysMonth(int day,int month,int year){
+        int nbDaysMonth;
+        if(month==2){
+
+            if((year%4==0 && year%100!=0) || year%400==0){ // February 29
+                nbDaysMonth=29;
+            }
+            else
+            {
+                nbDaysMonth=28;
+            }
+
+        }
+        else
+        {
+            if( (month<8 && month%2==0) || (month>=8 && month%2 ==1)){ //Mois de 30
+                nbDaysMonth=30;
+            }
+            else // mois de 31
+            {
+                nbDaysMonth=31;
+            }
+        }
+        return nbDaysMonth;
+    }
+    static int getNextFirstDayOfMonth(String date,String dateFin,int jour){
+
+
+        int weekdayStart=2; //Monday 1/1/1900
+        String dateReference="1/1/1900";
+        String dateStringReference[]=dateReference.split("/");
+        int day=Integer.parseInt(dateStringReference[0]);
+        int month=Integer.parseInt(dateStringReference[1]);
+        int year=Integer.parseInt(dateStringReference[2]);
+        int weekday=weekdayStart;
+
+
+
+
+        int nbDaysMonth;
+        while(compareDates(day+"/"+month+"/"+year,date)<0){
+            nbDaysMonth=getNumberDaysMonth(day,month,year);
+            weekday=(weekday+nbDaysMonth)%7;
+            month++;
+            if(month==13)
+            {
+                month=1;
+                year++;
+            }
+        }
+
+        int nbDaysWeekDay=(jour == weekday)?1:0;
+        String dateString[]=date.split("/");
+        day=Integer.parseInt(dateString[0]);
+        month=Integer.parseInt(dateString[1]);
+        year=Integer.parseInt(dateString[2]);
+        do{
+            nbDaysMonth=getNumberDaysMonth(day,month,year);
+
+            weekday=(weekday+nbDaysMonth)%7;
+            if(weekday==jour) {
+                nbDaysWeekDay++;
+                System.out.println(nbDaysWeekDay+"___"+weekday+"   :"+nbDaysMonth+": " +day+"/"+month+"/"+year+"\n");
+            }
+
+            month++;
+            if(month==13)
+            {
+                month=1;
+                year++;
+            }
+
+
+        }while(compareDates(day+"/"+month+"/"+year,dateFin)<0);
+
+        return nbDaysWeekDay;
+    }
+    static int getNumberOfWeekDaysOnFirstOfMonth(String start,String end,int jour){
+        int nbDays=0;
+        int weekDay=2;
+        int day= 1;
+        int month=1;
+        int year=1900;
+        String date=day+"/"+month+"/"+year;
+        while(compareDates(date,start)<0){
+            date=getNextWeekDay(date,weekDay,weekDay);
+        }
+        return nbDays;
+    }
 }
