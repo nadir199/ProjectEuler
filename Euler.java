@@ -1,4 +1,10 @@
+import javax.xml.stream.events.Characters;
+import java.io.*;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -1041,5 +1047,40 @@ public class Euler {
             i++;
         }
         return sumAmicables;
+    }
+
+    //Problem22 List of names
+    static long getAlphabeticalValue(String word){
+        long sum=0;
+        for(int i=0;i<word.length();i++){
+            sum+= (int)word.charAt(i)-(int)'A'+1;
+        }
+        return sum;
+    }
+    static String[] fileToStringArraySorted(String filePath){
+        String file="";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                file=file+line;
+            }
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        String[] names=file.split("\",\"");
+        names[0]=names[0].replace("\"","");
+        names[names.length-1]=names[names.length-1].replace("\"","");
+        Arrays.sort(names);
+        return names;
+    }
+    static BigInteger sumOfNameScores_Problem22(String filePath){
+        String[] sortedNames=fileToStringArraySorted(filePath);
+        BigInteger totalScore=BigInteger.ZERO;
+        for(int i=0;i<sortedNames.length;i++){
+            System.out.println((i+1)+" : " +sortedNames[i] + " alph : "+ getAlphabeticalValue(sortedNames[i]));
+            totalScore=totalScore.add(new BigInteger((long)(i+1)*getAlphabeticalValue(sortedNames[i])+""));
+        }
+        return totalScore;
     }
 }

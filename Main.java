@@ -8,9 +8,8 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        //System.out.println(Euler.isAmicable(220));
-        System.out.println(Euler.getSumOfAmicableUnder_Problem21(10000));
-
+        System.out.println(Euler.getAlphabeticalValue("COLIN"));
+        System.out.println(Euler.sumOfNameScores_Problem22("./files/p022_names.txt"));
     }
 }
 
