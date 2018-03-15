@@ -1083,4 +1083,47 @@ public class Euler {
         }
         return totalScore;
     }
+
+    //Problem 23 Abundant numbers
+    static boolean isAbundant(int number)
+    {
+        int sumDivisors=0;
+        for(int i=1;i<number/2+1;i++){
+            if(number%i==0)
+                sumDivisors+=i;
+            if(sumDivisors>number)
+                return true;
+        }
+        return false;
+    }
+
+    static int sumAllUnwritableAsSumOfTwoAbundantTill_Problem23(int THRESHOLD){
+        int sumUnwritable=0;
+        ArrayList<Integer> abundant = new ArrayList<>();
+        int abundantNow=1;
+        for(int i=1;i<=THRESHOLD;i++){
+            while(abundantNow<i){
+                if(isAbundant(abundantNow))
+                    abundant.add(abundantNow);
+                abundantNow++;
+            }
+
+            int inf=0;
+            int sup= abundant.size()-1;
+            boolean found = false;
+            while(inf<=sup && !found){
+                int sumOfTwoAbs=abundant.get(inf)+abundant.get(sup);
+                if(sumOfTwoAbs>i)
+                    sup--;
+                else if (sumOfTwoAbs<i)
+                    inf++;
+                else
+                    found=true;
+            }
+            if(!found)
+                sumUnwritable+=i;
+
+        }
+        return sumUnwritable;
+    }
 }
