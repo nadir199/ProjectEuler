@@ -981,16 +981,5 @@ public class Euler {
 
         return nbDaysWeekDay;
     }
-    static int getNumberOfWeekDaysOnFirstOfMonth(String start,String end,int jour){
-        int nbDays=0;
-        int weekDay=2;
-        int day= 1;
-        int month=1;
-        int year=1900;
-        String date=day+"/"+month+"/"+year;
-        while(compareDates(date,start)<0){
-            date=getNextWeekDay(date,weekDay,weekDay);
-        }
-        return nbDays;
-    }
+
 }
