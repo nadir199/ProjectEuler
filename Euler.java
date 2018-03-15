@@ -967,7 +967,6 @@ public class Euler {
             weekday=(weekday+nbDaysMonth)%7;
             if(weekday==jour) {
                 nbDaysWeekDay++;
-                System.out.println(nbDaysWeekDay+"___"+weekday+"   :"+nbDaysMonth+": " +day+"/"+month+"/"+year+"\n");
             }
 
             month++;
