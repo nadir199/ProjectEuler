@@ -8,10 +8,9 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println(Euler.sumOfDigitsOfFactorial_Problem20(100));
+        //System.out.println(Euler.isAmicable(220));
+        System.out.println(Euler.getSumOfAmicableUnder_Problem21(10000));
 
     }
-
-
 }
 

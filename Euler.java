@@ -1001,4 +1001,45 @@ public class Euler {
         }
         return sumDigits;
     }
+
+    //Problem21 Sum of amicable numbers under 10000
+    static int getSumDivisors(int number){
+        int sum=0;
+        for(int i=1;i<number/2+1;i++){
+            if(number%i==0)
+                sum+=i;
+        }
+        return sum;
+    }
+    static int isAmicable(int number){
+        int sumDivisors=getSumDivisors(number);
+        if(number==getSumDivisors(sumDivisors) && number!=sumDivisors)
+            return sumDivisors;
+        return 0;
+    }
+
+    static int getSumOfAmicableUnder_Problem21(int THRESHOLD){
+        int i=2;
+        int sumAmicables=0;
+        int ami=0;
+        HashSet<Integer> amicable = new HashSet<>();
+
+        while(i<THRESHOLD){
+            if(!amicable.contains(i)){
+                ami= isAmicable(i);
+                if(ami>0)
+                {
+                    System.out.println("Amis : "+i + " and "+ami+"\n");
+                    if(i!=ami) {
+                        amicable.add(i);
+                        sumAmicables+=i;
+                    }
+                    amicable.add(ami);
+                    sumAmicables+=ami;
+                }
+            }
+            i++;
+        }
+        return sumAmicables;
+    }
 }
