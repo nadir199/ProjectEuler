@@ -8,7 +8,7 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println(Euler.getNextFirstDayOfMonth("1/1/1901","31/12/2000",1));
+        System.out.println(Euler.getNumberOfFirstDaysOnDay_Problem19("1/1/1901","31/12/2000",1));
 
     }
 

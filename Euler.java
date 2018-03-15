@@ -904,11 +904,6 @@ public class Euler {
         return date;
     }
 
-    static int getNbDaysPerYear(int year){
-        if( (year%4==0 && year%100!=0)  || year%400 == 0)
-            return 365;
-        return 366;
-    }
     static int getNumberDaysMonth(int day,int month,int year){
         int nbDaysMonth;
         if(month==2){
@@ -934,7 +929,8 @@ public class Euler {
         }
         return nbDaysMonth;
     }
-    static int getNextFirstDayOfMonth(String date,String dateFin,int jour){
+    //Date Début >= 1/1/1900
+    static int getNumberOfFirstDaysOnDay_Problem19(String date,String dateFin,int jour){
 
 
         int weekdayStart=2; //Monday 1/1/1900
