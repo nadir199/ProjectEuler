@@ -982,4 +982,23 @@ public class Euler {
         return nbDaysWeekDay;
     }
 
+    //Problem 20 Factorial
+    static BigInteger bigFactorial(int number){
+        if(number==0)
+            return BigInteger.ONE;
+        BigInteger numberBigint=new BigInteger(""+number);
+        BigInteger factorial= BigInteger.ONE;
+        for(BigInteger i=new BigInteger("2");i.compareTo(numberBigint)<=0;i=i.add(BigInteger.ONE)){
+            factorial=factorial.multiply(i);
+        }
+        return factorial;
+    }
+    static int sumOfDigitsOfFactorial_Problem20(int number){
+        String[] fact=bigFactorial(number).toString().split("");
+        int sumDigits=0;
+        for(int i=0;i<fact.length;i++){
+            sumDigits+=Integer.parseInt(fact[i]);
+        }
+        return sumDigits;
+    }
 }
