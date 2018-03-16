@@ -1131,7 +1131,7 @@ public class Euler {
 
     //Problem 24 Lexicographic permutations
     static int nowTh=0;
-    static void printPerms(String fixedPart,String toPermute,int NTH){
+    static void printPerms_Problem24(String fixedPart,String toPermute,int NTH){
         if(toPermute.length()==1) {
             nowTh++;
             if(NTH==nowTh)
@@ -1143,8 +1143,28 @@ public class Euler {
             fixedPart=saveFixedPart+toPermute.charAt(i);
             if(toPermute.length()==2 && nowTh+1==NTH)
                 System.out.print(fixedPart);
-            printPerms(fixedPart,toPermute.replace(toPermute.charAt(i)+"",""),NTH);
+            printPerms_Problem24(fixedPart,toPermute.replace(toPermute.charAt(i)+"",""),NTH);
             //System.out.print(toPermute.charAt(i));
         }
+    }
+
+    //Problem 25 Fibonacci
+    static long getIndexFirstTermContainsNDigits_Problem25(int nbDigits){
+        BigInteger fn_1=BigInteger.ONE;
+        BigInteger fn=BigInteger.ONE;
+        BigInteger newTerm=BigInteger.ZERO;
+        long newTermIndex=2;
+        if (nbDigits==1)
+            return 1;
+        BigInteger power=BigInteger.TEN.pow(nbDigits-1);
+        while(newTerm.divide(power).equals(BigInteger.ZERO)){
+            newTerm=fn.add(fn_1);
+            fn_1=fn;
+            fn=newTerm;
+            newTermIndex++;
+        }
+        return newTermIndex;
+
+
     }
 }

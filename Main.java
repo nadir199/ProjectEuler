@@ -8,7 +8,7 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        Euler.printPerms("","0123456789",1000000);
+        System.out.println(Euler.getIndexFirstTermContainsNDigits_Problem25(1000));
     }
 }
 
