@@ -1247,4 +1247,17 @@ public class Euler {
         System.out.println("Equation n²+"+maxA+"n+"+maxB);
         return max;
     }
+
+    //Problem 28 Spiral
+    static int getSumSpiral_Problem28(int size){
+        int sum=1;
+        int number=1;
+        for(int i=2;i<size;i=i+2){
+            for(int j=0;j<4;j++){
+                number=number+i;
+                sum+=number;
+            }
+        }
+        return sum;
+    }
 }

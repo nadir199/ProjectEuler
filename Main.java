@@ -8,9 +8,7 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        //System.out.println(new BigInteger("-4").nextProbablePrime());
-        System.out.println(Euler.getLongestSeriesLength(new BigInteger("-79"),new BigInteger("1601")));
-        System.out.println(Euler.getLongestSeriesForAsAndBs_Problem27(1000,1000));
+        System.out.println(Euler.getSumSpiral_Problem28(1001));
     }
 }
 
