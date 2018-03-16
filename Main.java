@@ -8,7 +8,7 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println(Euler.getIndexFirstTermContainsNDigits_Problem25(1000));
+        System.out.println("Number with max cycle 1/"+Euler.numberLongestRecurringCycle(1000));
     }
 }
 

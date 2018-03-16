@@ -1164,7 +1164,49 @@ public class Euler {
             newTermIndex++;
         }
         return newTermIndex;
+    }
 
+    //Problem 25
+    static int getReduced2And5PowersNumber(int number){
+        int pow2=0;
+        while(number%2==0){
+            number=number/2;
+            pow2++;
 
+        }
+
+        int pow5=0;
+        while(number%5==0){
+            number=number/5;
+            pow5++;
+        }
+        return number;
+    }
+    //( 1/ 2^alpha*5^beta * A ) has the same cycle as 1/A
+    static int getCycleof1OverNumber(int number){
+
+        int reduced=getReduced2And5PowersNumber(number);
+        int power=1;
+        if(reduced!=1 && reduced==number)
+            while(!BigInteger.TEN.pow(power).subtract(BigInteger.ONE).mod(new BigInteger(reduced+"")).equals(BigInteger.ZERO)){
+                power++;
+            }
+        else
+            return 0;
+        return power;
+    }
+    static int numberLongestRecurringCycle(int THRESHOLD){
+        int maxCycle=0;
+        int maxCycleNumber=2;
+        for(int i=2;i<THRESHOLD;i++){
+            int cycle=getCycleof1OverNumber(i);
+            System.out.println(i+" : "+cycle);
+            if(cycle>maxCycle) {
+                maxCycle = cycle;
+                maxCycleNumber=i;
+            }
+        }
+        System.out.println("MAX CYCLE : "+maxCycle);
+        return maxCycleNumber;
     }
 }
