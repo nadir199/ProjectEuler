@@ -8,7 +8,7 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println(Euler.sumAllUnwritableAsSumOfTwoAbundantTill_Problem23(28123));
+        Euler.printPerms("","0123456789",1000000);
     }
 }
 

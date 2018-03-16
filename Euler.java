@@ -1085,10 +1085,12 @@ public class Euler {
     }
 
     //Problem 23 Abundant numbers
+
     static boolean isAbundant(int number)
     {
         int sumDivisors=0;
         for(int i=1;i<number/2+1;i++){
+
             if(number%i==0)
                 sumDivisors+=i;
             if(sumDivisors>number)
@@ -1125,5 +1127,24 @@ public class Euler {
 
         }
         return sumUnwritable;
+    }
+
+    //Problem 24 Lexicographic permutations
+    static int nowTh=0;
+    static void printPerms(String fixedPart,String toPermute,int NTH){
+        if(toPermute.length()==1) {
+            nowTh++;
+            if(NTH==nowTh)
+                System.out.println(toPermute);
+            return;
+        }
+        String saveFixedPart=fixedPart;
+        for(int i=0;i<toPermute.length();i++){
+            fixedPart=saveFixedPart+toPermute.charAt(i);
+            if(toPermute.length()==2 && nowTh+1==NTH)
+                System.out.print(fixedPart);
+            printPerms(fixedPart,toPermute.replace(toPermute.charAt(i)+"",""),NTH);
+            //System.out.print(toPermute.charAt(i));
+        }
     }
 }
