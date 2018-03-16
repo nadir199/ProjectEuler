@@ -44,6 +44,8 @@ public class Euler {
 
     //Problem 3 Find the largest prime factor of a number
     public static boolean isPrime(BigInteger number){
+        if(number.compareTo(BigInteger.ZERO)<0)
+            number=number.negate();
         for( BigInteger i= new BigInteger("2");i.compareTo(number.divide(new BigInteger("2")))<0;i=i.add(new BigInteger("1"))){
             if(number.mod(i).equals(BigInteger.ZERO))
                 return false;
@@ -1166,7 +1168,7 @@ public class Euler {
         return newTermIndex;
     }
 
-    //Problem 25
+    //Problem 26
     static int getReduced2And5PowersNumber(int number){
         int pow2=0;
         while(number%2==0){
@@ -1195,7 +1197,7 @@ public class Euler {
             return 0;
         return power;
     }
-    static int numberLongestRecurringCycle(int THRESHOLD){
+    static int numberLongestRecurringCycle_Problem26(int THRESHOLD){
         int maxCycle=0;
         int maxCycleNumber=2;
         for(int i=2;i<THRESHOLD;i++){
@@ -1208,5 +1210,41 @@ public class Euler {
         }
         System.out.println("MAX CYCLE : "+maxCycle);
         return maxCycleNumber;
+    }
+    //Problem 27
+    static int getLongestSeriesLength(BigInteger a,BigInteger b){
+        int count=0;
+        for(BigInteger n=BigInteger.ZERO;n.compareTo(b)<0;n=n.add(BigInteger.ONE)){
+            BigInteger calc=n.pow(2).add(a.multiply(n)).add(b);
+            if(isPrime(calc)){
+                count++;
+            }
+            else
+                break;
+        }
+        return count;
+    }
+    static int getLongestSeriesForAsAndBs_Problem27(int THRESHOLDA,int THRESHOLDB){
+        int max=0;
+        BigInteger maxA=BigInteger.ZERO;
+        BigInteger maxB=BigInteger.ZERO;
+        if(THRESHOLDA%2==0)
+            THRESHOLDA=THRESHOLDA-1;
+        for(BigInteger a=new BigInteger("-"+THRESHOLDA);a.compareTo(new BigInteger(""+THRESHOLDA))<=0;a=a.add(new BigInteger("2"))){
+            for(BigInteger b=new BigInteger("-"+THRESHOLDB);b.compareTo(new BigInteger(""+THRESHOLDB))<=0;b=b.add(new BigInteger("1"))){
+                if(!isPrime(b))
+                    continue;
+                int length=getLongestSeriesLength(a,b);
+                if(length>max){
+                    max=length;
+                    maxA=a;
+                    maxB=b;
+                }
+                    
+            }
+        }
+        System.out.println("Maximum A : "+maxA+"  maximumB "+maxB+" Product "+maxA.multiply(maxB));
+        System.out.println("Equation n²+"+maxA+"n+"+maxB);
+        return max;
     }
 }
