@@ -1260,4 +1260,18 @@ public class Euler {
         }
         return sum;
     }
+
+    //Problem 29 Distinct powers
+    static int getNumberOfUniquePower_Problem29(int a,int b){
+        HashSet<BigInteger> powersSet=new HashSet<>();
+        for(int i=2;i<=a;i++){
+            BigInteger bigI=new BigInteger(i+"");
+            for(int j=2;j<=b;j++){
+                powersSet.add(bigI.pow(j));
+            }
+        }
+        return powersSet.size();
+    }
+
+    //
 }

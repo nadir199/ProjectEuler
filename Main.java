@@ -8,7 +8,7 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println(Euler.getSumSpiral_Problem28(1001));
+        System.out.println(Euler.getNumberOfUniquePower_Problem29(100,100));
     }
 }
 
