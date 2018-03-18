@@ -1273,5 +1273,27 @@ public class Euler {
         return powersSet.size();
     }
 
-    //
+    //Problem 30
+    static int sumOfNthPowDigits(int number,int power){
+        String numString=Integer.toString(number);
+        int sum=0;
+        for(int i=0;i<numString.length();i++){
+            sum+=(int) Math.pow(Integer.parseInt(""+numString.charAt(i)),power);
+        }
+        return sum;
+    }
+    static int sumOfNumbersWrittenAsSumOfPowersOfDigits_Problem30(int power){
+        int resultSum=0;
+        int i=0;
+        int nineToPow=(int) Math.pow(9,power);
+        while((int)Math.pow(10,Integer.toString(i).length()-1)<=Integer.toString(i).length()*nineToPow){
+            int sum=Euler.sumOfNthPowDigits(i,power);
+            if(i==sum) {
+                System.out.println(i + " sum : " + sum);
+                resultSum+=sum;
+            }
+            i++;
+        }
+        return resultSum;
+    }
 }
