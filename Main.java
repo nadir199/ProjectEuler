@@ -8,7 +8,9 @@ import java.util.BitSet;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println(Euler.sumOfNumbersWrittenAsSumOfPowersOfDigits_Problem30(5));
+        long start = System.currentTimeMillis();
+        System.out.println(Euler.getNumberOfPossible2Pounds_Problem31());
+        System.out.println("Execution time:"+(System.currentTimeMillis()-start) +"ms");
     }
 }
 

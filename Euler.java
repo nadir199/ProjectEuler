@@ -5,10 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by Asus on 20/09/2017.
@@ -1286,6 +1283,7 @@ public class Euler {
         int resultSum=0;
         int i=0;
         int nineToPow=(int) Math.pow(9,power);
+        // 10^(n-1) <= n*9^power   while biggest number possible with n digits is still greater than lowest n-1 digits number
         while((int)Math.pow(10,Integer.toString(i).length()-1)<=Integer.toString(i).length()*nineToPow){
             int sum=Euler.sumOfNthPowDigits(i,power);
             if(i==sum) {
@@ -1295,5 +1293,44 @@ public class Euler {
             i++;
         }
         return resultSum;
+    }
+
+    //Problem31
+    static int getNumberOfPossible2Pounds_Problem31(){
+        int sumMoney=0;
+        int nbPossibilites=1;
+        for(int nb100=0;nb100<=2;nb100++){
+            sumMoney+=100*nb100;
+            for(int nb50=0;nb50<=(200-sumMoney)/50+1;nb50++){
+                sumMoney+=50*nb50;
+                for(int nb20=0;nb20<=(200-sumMoney)/20+1;nb20++){
+                    sumMoney+=20*nb20;
+                    for(int nb10=0;nb10<=(200-sumMoney)/10+1;nb10++){
+                        sumMoney+=10*nb10;
+                        for(int nb5=0;nb5<=(200-sumMoney)/5+1;nb5++){
+                            sumMoney+=5*nb5;
+                            for(int nb2=0;nb2<(200-sumMoney)/2+1;nb2++){
+                                sumMoney+=2*nb2;
+                                for(int nb1=0;nb1<=(200-sumMoney);nb1++){
+                                    sumMoney+=nb1;
+                                    if(sumMoney==200) {
+                                        nbPossibilites++;
+                                        //System.out.println(nb1+":"+nb2+":"+nb5+":"+nb10+":"+nb20+":"+nb50+":"+nb100);
+                                    }
+                                    sumMoney-=nb1;
+                                }
+                                sumMoney-=2*nb2;
+                            }
+                            sumMoney-=5*nb5;
+                        }
+                        sumMoney-=10*nb10;
+                    }
+                    sumMoney-=20*nb20;
+                }
+                sumMoney-=50*nb50;
+            }
+            sumMoney-=100*nb100;
+        }
+        return nbPossibilites;
     }
 }
